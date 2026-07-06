@@ -1,4 +1,4 @@
-const CACHE_NAME = 'henngaku-v2.0.0';
+const CACHE_NAME = 'henngaku-v2.1.0';
 const BASE_PATH = '/hoken.hengak';
 const urlsToCache = [
   BASE_PATH + '/',
