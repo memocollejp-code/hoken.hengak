@@ -7,12 +7,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#2c3e50">
     <title>変額保険販売資格試験模擬テスト v2.1.0</title>
-    <link rel="manifest" href="/hoken.hengak/manifest.json">
-    <link rel="icon" type="image/png" href="/hoken.hengak/icon.png">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/png" href="./icon.png">
     <script>
         // Service Worker自動登録 + 更新通知
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/hoken.hengak/sw.js').then(reg => {
+            navigator.serviceWorker.register('./sw.js').then(reg => {
                 // 更新をポーリング（30秒ごと）
                 setInterval(() => {
                     reg.update();

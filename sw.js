@@ -1,10 +1,9 @@
 const CACHE_NAME = 'henngaku-v2.1.0';
-const BASE_PATH = '/hoken.hengak';
 const urlsToCache = [
-  BASE_PATH + '/',
-  BASE_PATH + '/index.html',
-  BASE_PATH + '/manifest.json',
-  BASE_PATH + '/icon.png'
+  './',
+  './index.html',
+  './manifest.json',
+  './icon.png'
 ];
 
 // Install: キャッシュ作成
@@ -14,7 +13,7 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME).then(cache => {
       console.log('[SW] キャッシュ作成:', CACHE_NAME);
       // index.html のみキャッシュ（動的にキャッシュ）
-      return cache.add(BASE_PATH + '/index.html').catch(() => {
+      return cache.add('./index.html').catch(() => {
         console.log('[SW] index.html がオフラインの場合はスキップ');
       });
     })
@@ -46,7 +45,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
 
   // 外部ドメイン・WebSocket・Chrome拡張などはスキップ
-  if (url.origin !== location.origin || !url.pathname.startsWith(BASE_PATH)) {
+  if (url.origin !== location.origin) {
     return;
   }
 
