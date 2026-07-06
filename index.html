@@ -218,6 +218,12 @@
             color: #2c3e50;
         }
 
+        #screenQuiz.screen.active {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
         .quiz-header {
             background: #ecf0f1;
             padding: 12px;
@@ -228,6 +234,35 @@
             align-items: center;
             font-size: 0.85rem;
             font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .quiz-header-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+        }
+
+        .btn-icon-finish {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: none;
+            background: #e74c3c;
+            color: white;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .btn-icon-finish:active {
+            background: #c0392b;
         }
 
         .question-box {
@@ -236,7 +271,8 @@
             border-radius: 8px;
             margin-bottom: 12px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            max-height: 40vh;
+            flex: 1;
+            min-height: 0;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -348,7 +384,7 @@
         .quiz-nav {
             display: flex;
             gap: 8px;
-            margin-bottom: 12px;
+            flex-shrink: 0;
         }
 
         .btn-nav {
@@ -391,22 +427,6 @@
         .btn-next:disabled {
             opacity: 0.5;
             pointer-events: none;
-        }
-
-        .btn-finish {
-            width: 100%;
-            background: #e74c3c;
-            color: white;
-            padding: 14px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            min-height: 48px;
-        }
-
-        .btn-finish:active {
-            background: #c0392b;
         }
 
         .result-box {
@@ -620,7 +640,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>変額保険販売資格試験模擬テスト <span class="version">v1.0.9</span></h1>
+        <h1>変額保険販売資格試験模擬テスト <span class="version">v1.1.0</span></h1>
         <div class="header-right">
             <button class="btn-header" id="btnSettings">⚙️</button>
         </div>
@@ -658,7 +678,10 @@
         <div id="screenQuiz" class="screen">
             <div class="quiz-header">
                 <span id="qNum">問 1 / 10</span>
-                <span id="timer">40:00</span>
+                <div class="quiz-header-right">
+                    <button class="btn-icon-finish" id="btnEnd" title="終了して採点" aria-label="終了して採点">🏁</button>
+                    <span id="timer">40:00</span>
+                </div>
             </div>
 
             <div class="question-box">
@@ -672,7 +695,6 @@
                 <button class="btn-nav btn-prev" id="btnPrev">← 前</button>
                 <button class="btn-nav btn-next" id="btnNext">次 →</button>
             </div>
-            <button class="btn-finish" id="btnEnd">終了して採点</button>
         </div>
 
         <div id="screenResult" class="screen">
@@ -919,6 +941,7 @@
         }
 
         function finishQuiz() {
+            if (timeLeft >= 0 && !confirm('終了して採点しますか？')) return;
             if (timerID) clearInterval(timerID);
             let correct = 0;
             questions.forEach((q, i) => {
