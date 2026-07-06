@@ -1,0 +1,21 @@
+{
+  "name": "変額資産運用アプリ",
+  "short_name": "変額資産",
+  "description": "変額保険販売資格試験対策の模擬テストアプリ",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#2c3e50",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["education"],
+  "prefer_related_applications": false
+}
